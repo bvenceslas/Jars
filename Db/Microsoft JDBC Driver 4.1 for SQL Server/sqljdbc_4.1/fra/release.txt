@@ -1,0 +1,95 @@
+Informations sur la version
+Pilote JDBC 4.1 Microsoft pour SQL Server
+Novembre 2014
+
+
+INTRODUCTION
+------------
+Le présent fichier contient des informations importantes ou de dernière minute
+qui complètent la documentation du Pilote JDBC 4.1 Microsoft pour
+SQL Server. Il est recommandé de lire ce fichier entièrement avant 
+de procéder à l'installation du pilote JDBC.
+
+Nous attachons une grande importance à vos commentaires et nous efforcerons
+de les prendre en compte le plus rapidement possible. Pour plus d'informations
+sur l'envoi de commentaires via les blogs et les forums en ligne relatifs au pilote
+JDBC, visitez la page Pilote JDBC 4.0 Microsoft pour SQL Server à l'adresse
+http://msdn.microsoft.com/data/jdbc.
+
+
+INSTALLATION
+------------
+Les instructions relatives à l'installation du pilote JDBC se trouvent dans le fichier install.txt.
+Reportez-vous à ce fichier pour plus d'informations sur l'installation du pilote
+JDBC sur les systèmes d'exploitation Windows et Unix.
+
+SYSTÈMES D'EXPLOITATION PRIS EN CHARGE
+---------------------------
+Le Pilote JDBC 4.1 Microsoft pour SQL Server prend en charge les systèmes d'exploitation suivants : 
+Linux, Unix, Windows Server 2008,
+Windows Vista Service Pack 1, Windows Server 2008 R2, Windows 7, Windows 8 et Windows 8.1.
+
+La liste ci-dessus présente certains des systèmes d'exploitation pris en charge.
+Le pilote JDBC est conçu pour fonctionner sur tout système d'exploitation prenant en charge
+l'utilisation d'une machine virtuelle Java (JVM). Toutefois, seuls les systèmes d'exploitation Sun Solaris, SUSE
+Linux et Windows Vista Service Pack 1 ou version ultérieure ont été testés.
+
+CONTENU DE LA VERSION
+----------------
+Le fichier exécutable zip ou tar du Pilote JDBC 4.1 Microsoft pour SQL Server
+décompresse les fichiers suivants aux emplacements spécifiés, en fonction
+du répertoire d'installation sélectionné :
+
+<installation directory>\sqljdbc_<version>\<language>\install.txt
+<installation directory>\sqljdbc_<version>\<language>\release.txt
+<installation directory>\sqljdbc_<version>\<language>\license.txt
+<installation directory>\sqljdbc_<version>\<language>\sqljdbc.jar
+<installation directory>\sqljdbc_<version>\<language>\sqljdbc4.jar
+<installation directory>\sqljdbc_<version>\<language>\sqljdbc41.jar
+<installation directory>\sqljdbc_<version>\<language>\auth\x86\sqljdbc_auth.dll
+<installation directory>\sqljdbc_<version>\<language>\auth\x64\sqljdbc_auth.dll
+<installation directory>\sqljdbc_<version>\<language>\xa\xa_install.sql
+<installation directory>\sqljdbc_<version>\<language>\xa\x86\sqljdbc_xa.dll
+<installation directory>\sqljdbc_<version>\<language>\xa\x64\sqljdbc_xa.dll
+
+
+LISTE DE MODIFICATIONS
+-----------
+Modifications de 4.0 à 4.1 :
+
+2828290 Le nouveau nom du serveur est désormais envoyé dans le paquet Login7 après redirection d'une demande.
+
+3362720 Le pilote JDBC prend désormais en charge le Kit de développement Java (JDK) version 7.0, en plus de JDK versions 5.0 et 6.0. Il inclut un nouveau fichier jar, sqljdbc41.jar, qui prend en charge JDK 7.0 et qui est compatible avec l'API JDBC 4.0. 
+
+PROBLÈMES CONNUS
+------------
+Voici une liste des problèmes connus liés au pilote JDBC 4.1 Microsoft pour SQL Server :
+
+1) LIMITATIONS DES MÉTADONNÉES DE PARAMÈTRE AVEC L'INSTRUCTION SQL MERGE
+
+PreparedStatement.getParameterMetadata() lève une exception SQLException en cas d'utilisation
+avec une requête MERGE paramétrable.
+
+
+2) Java Kerberos et machines virtuelles IBM
+
+Si vous exécutez le pilote dans un environnement Windows, vous devrez éventuellement spécifier le nom du principal dans le fichier de configuration pour que Java Kerberos puisse fonctionner. Par exemple : 
+SQLJDBCDriver {
+com.ibm.security.auth.module.Krb5LoginModule required useDefaultCcache=true credsType=initiator principal=principalname@principaldomain;
+};
+
+
+3) SUPPRESSION DE CONNEXION AVEC SQL AZURE
+
+Lors de la connexion à SQL Azure, les connexions inactives peuvent être arrêtées par un composant réseau (tel un pare-feu) après une 
+période d'inactivité. Pour éviter la suppression des connexions inactives par un composant réseau, les paramètres 
+de registre suivants (ou leurs équivalents non-Windows) doivent être définis sur le système d'exploitation dans lequel le pilote est chargé :
+           
+           Paramètre de Registre                                                           Valeur recommandée
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveTime                 30000      
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveInterval             1000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmission      10
+  
+
+
+

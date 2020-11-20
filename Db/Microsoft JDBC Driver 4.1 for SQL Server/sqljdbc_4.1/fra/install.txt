@@ -1,0 +1,39 @@
+Instructions d'installation
+Pilote JDBC 4.1 Microsoft pour SQL Server
+
+
+INTRODUCTION
+------------
+Le présent document contient des instructions pour décompresser les fichiers sqljdbc_<version>_enu.exe et 
+sqljdbc_<version>_enu.tar.gz.
+
+
+WINDOWS
+-------
+1. Lisez le fichier license.txt. En téléchargeant et en utilisant le pilote JDBC 4.1 Microsoft pour SQL Server, vous marquez votre accord avec les termes de ce contrat de licence.
+
+2. Téléchargez le fichier sqljdbc_<version>_enu.exe dans un répertoire temporaire.
+
+3. Exécutez sqljdbc_<version>_enu.exe.
+
+4. Entrez un répertoire d'installation quand vous y êtes invité ; il est recommandé de décompresser
+   le fichier zip dans %ProgramFiles% avec le répertoire par défaut :
+
+	Pilote JDBC 4.1 Microsoft pour SQL Server
+
+
+UNIX
+----
+1. Lisez le fichier license.txt. En téléchargeant et en utilisant le Pilote JDBC 4.1 Microsoft pour SQL Server, vous marquez votre accord avec les termes de ce contrat de licence.
+
+2. Téléchargez le fichier sqljdbc_<version>_enu.tar.gz dans un répertoire temporaire.
+
+3. Pour décompresser le fichier tar compressé, accédez au répertoire dans lequel vous souhaitez
+   décompresser le pilote, puis tapez :
+
+	gzip -d sqljdbc_<version>_enu.tar.gz
+
+4. Pour décompresser le fichier tar, déplacez-le vers le répertoire dans lequel vous souhaitez installer 
+   le pilote, puis tapez :
+
+	tar -xf sqljdbc_<version>_enu.tar

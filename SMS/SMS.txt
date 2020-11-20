@@ -1,0 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sms;
+
+import org.smslib.CMessage;
+import org.smslib.COutgoingMessage;
+import org.smslib.CService;
+
+/**
+ *
+ * @author KingDan
+ */
+public class sms 
+{
+    public static boolean send (String message,String numero,CService service) throws Exception
+    {
+        try 
+        {
+            COutgoingMessage sms = new COutgoingMessage(numero, message);
+            sms.setMessageEncoding(CMessage.MessageEncoding.Enc7Bit);
+            sms.setStatusReport(true);
+            sms.setFlashSms(false);
+            sms.setValidityPeriod(1);
+            
+            service.sendMessage(sms);
+            if(sms.getStatusReport())
+            {
+                return true;
+            }
+        }
+        catch (Exception e) 
+        {
+            throw new Exception(e.getMessage());
+        }
+        return false;
+    }
+}

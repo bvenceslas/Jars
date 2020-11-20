@@ -1,0 +1,132 @@
+﻿Informations sur la version
+Pilote JDBC 4.0 Microsoft pour SQL Server
+Mars 2012
+
+
+INTRODUCTION
+------------
+Le présent fichier contient des informations importantes ou de
+dernière minute qui complètent la documentation du pilote
+JDBC 4.0 Microsoft pour SQL Server. Il est recommandé de lire ce fichier entièrement
+avant de procéder à l'installation du pilote JDBC.
+
+Nous attachons une grande importance à vos commentaires
+et nous efforcerons de les prendre en compte le plus rapidement possible. Pour plus d'informations
+sur l'envoi de commentaires via les blogs et les forums en ligne
+relatifs au pilote JDBC, visitez la page consacrée au pilote
+SQL 4.0 Microsoft pour SQL Server à l'adresse http://msdn.microsoft.com/data/jdbc.
+
+
+INSTALLATION
+------------
+Les instructions relatives à l'installation du pilote JDBC se trouvent dans le fichier install.txt.
+Référez-vous à ce fichier pour plus d'informations sur l'installation
+du pilote JDBC sur les systèmes d'exploitation Windows et Unix.
+
+SYSTÈMES D'EXPLOITATION PRIS EN CHARGE
+---------------------------
+Le pilote JDBC 4.0 Microsoft pour SQL Server prend en charge les systèmes d'exploitation suivants : 
+Linux, Unix, Windows Server 2008,
+Windows Vista Service Pack 1, Windows Server 2008 R2 et Windows 7.
+
+La liste ci-dessus présente certains des systèmes d'exploitation pris en charge.
+Le pilote JDBC est conçu pour fonctionner sur tout système d'exploitation
+prenant en charge l'utilisation d'une machine virtuelle Java (JVM).  Toutefois, seuls les systèmes d'exploitation
+Sun Solaris, SUSE Linux et Windows Vista Service Pack 1 ou version ultérieure ont été testés.
+
+CONTENU DE LA VERSION
+----------------
+Le fichier exécutable zip ou tar du pilote JDBC 4.0 Microsoft pour SQL Server
+décompresse les fichiers suivants aux emplacements spécifiés, relatifs
+au répertoire d'installation sélectionné :
+
+<répertoire d'installation>\sqljdbc_<version>\<langue>\install.txt
+<répertoire d'installation>\sqljdbc_<version>\<langue>\release.txt
+<répertoire d'installation>\sqljdbc_<version>\<langue>\license.txt
+<répertoire d'installation>\sqljdbc_<version>\<langue>\sqljdbc.jar
+<répertoire d'installation>\sqljdbc_<version>\<langue>\sqljdbc4.jar
+<répertoire d'installation>\sqljdbc_<version>\<langue>\auth\x86\sqljdbc_auth.dll
+<répertoire d'installation>\sqljdbc_<version>\<langue>\auth\x64\sqljdbc_auth.dll
+<répertoire d'installation>\sqljdbc_<version>\<langue>\help\default.htm
+<répertoire d'installation>\sqljdbc_<version>\<langue>\help\index.htm
+<répertoire d'installation>\sqljdbc_<version>\<langue>\help\toc.htm
+<répertoire d'installation>\sqljdbc_<version>\<langue>\help\html\<pages doc...>
+<répertoire d'installation>\sqljdbc_<version>\<langue>\help\local\<fichiers doc...>
+<répertoire d'installation>\sqljdbc_<version>\<langue>\help\samples\<fichiers exemples...>
+<répertoire d'installation>\sqljdbc_<version>\<langue>\xa\xa_install.sql
+<répertoire d'installation>\sqljdbc_<version>\<langue>\xa\x86\sqljdbc_xa.dll
+<répertoire d'installation>\sqljdbc_<version>\<langue>\xa\x64\sqljdbc_xa.dll
+
+
+LISTE DE MODIFICATIONS
+-----------
+Modifications de 3.0 à 4.0 :
+
+1765616 DatabaseMetadata.getTypeInfo retourne désormais de nouvelles valeurs java.sql.Type pour date, time, datetime2, datetimeoffset pour katmai et les versions ultérieures
+
+1764334 Ajout de la prise en charge du suivi du délai d'attente des transactions XA JDBC et des ID de transaction (XID)
+
+1750318 Les fonctions SQLServerDatabaseMetaData functions fonctionnent désormais correctement lorsqu'une connexion regroupée est réutilisée.
+
+1768845 Le comportement de setTimestamp et d'updateTimestamp est homogène en matière d'arrondi. Les données seront arrondies 
+        à 7 décimales par le pilote avant d'être envoyées au serveur.
+
+1770134 updateTime sur un type de principal horaire d'une valeur maximale de (23:59:59.999) utilise désormais un comportement d'arrondi correct
+
+1761042 Les propriétés DataSource booléennes consignent désormais les appels de sortie dans le journal
+
+1750330 Mise à jour du script XA SQL pour éviter les erreurs trompeuses lors de la première exécution
+
+1761393 Amélioration du suivi pour les méthodes unwrap
+
+1945579 DatabaseMetaData.getSchemas fonctionne désormais correctement avec SQL Azure et SQL Server pour tous les classements.
+
+1963089 La propriété de connexion hostNameInCertificate n'est plus obligatoire pour valider un certificat SSL sur SQL Azure.
+
+1958531 Si une connexion à un serveur qui n'est pas configuré pour la mise en miroir de base de données échoue pendant l'ouverture de session
+        (par exemple parce que la base de données n'existe pas), le pilote ne procède pas automatiquement à un nouvel essai.
+
+1954701 L'exception levée en cas d'insertion d'une ligne en double contient désormais SQLState 23000.
+
+2055259 Amélioration du message d'erreur généré lorsque l'authentification intégrée échoue après le chargement de sqljdbc_auth.dll.
+
+2083373 Les requêtes paramétrables volumineuses, contenant des arguments non valides, exécutées sur SQL Azure lèvent désormais une exception sans fermer la connexion.
+
+2084385 getDate, getTimestamp et getDateTimeOffset retournent désormais des valeurs correctes avec JRE 1.7 pour toutes les dates.
+
+2105115 getObject sur un ResultSet obtenu à partir de DatabaseMetaData.getColumns fonctionne désormais correctement.
+
+
+PROBLÈMES CONNUS
+------------
+Voici une liste des problèmes connus liés au pilote JDBC 4.0 Microsoft pour SQL Server :
+
+1) LIMITATIONS DES MÉTADONNÉES DE PARAMÈTRE AVEC L'INSTRUCTION SQL MERGE
+
+PreparedStatement.getParameterMetadata() lève une SQLException en cas d'utilisation
+avec une requête MERGE paramétrable.
+
+
+2) Java Kerberos et machines virtuelles IBM
+
+Si vous exécutez le pilote dans un environnement Windows, vous devrez éventuellement spécifier le nom du principal dans le fichier de configuration
+pour que Java Kerberos puisse fonctionner. Par exemple : 
+SQLJDBCDriver {
+com.ibm.security.auth.module.Krb5LoginModule required useDefaultCcache=true credsType=initiator principal=principalname@principaldomain;
+};
+
+
+3) SUPPRESSION DE CONNEXION AVEC SQL AZURE
+
+Lors de la connexion à SQL Azure, les connexions inactives peuvent être arrêtées par un composant réseau (tel un pare-feu)
+après une période d'inactivité. Pour éviter la suppression des connexions inactives par un composant réseau,
+les paramètres de registre suivants (ou leurs équivalents non Windows) doivent être définis sur le système d'exploitation dans lequel se trouve le pilote :
+           
+           Paramètre de Registre                                                           Valeur recommandée
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveTime                 30000      
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveInterval             1000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmission      10
+  
+
+
+
